@@ -61,3 +61,5 @@ This application uses the SWAPI API (https://www.swapi.tech/) to fetch Star Wars
 - Films: `https://www.swapi.tech/api/films`
 - Individual film: `https://www.swapi.tech/api/films/{id}`
 - Characters, planets, and starships are fetched from URLs provided in the film data
+> **Sidenote:** I included some links from where i got the ideas too as a comment.
+
