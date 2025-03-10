@@ -1,0 +1,391 @@
+/*
+resources:
+
+animation
+https://css-tricks.com/snippets/css/star-wars-crawl-text/
+https://polarnotion.github.io/starwarsintro/
+https://codersblock.com/blog/star-wars-scene-transition-effects-in-css/
+
+*/
+
+
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: 'Pathway Gothic One', sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+/* Background Effects */
+.stars, .twinkling {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.stars {
+    background: #000 url('https://i.imgur.com/YKY28eT.png') repeat top center;
+    z-index: -2;
+}
+
+.twinkling {
+    background: transparent url('https://i.imgur.com/XYMF4ca.png') repeat top center;
+    z-index: -1;
+    animation: move-twink-back 200s linear infinite;
+}
+
+@keyframes move-twink-back {
+    from {background-position: 0 0;}
+    to {background-position: -10000px 5000px;}
+}
+
+/* Intro Animation */
+#intro-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 100;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 400px;
+}
+
+.star-wars-intro {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #FFE81F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.intro-text {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5em;
+    opacity: 0;
+    animation: fadeInOut 5s ease-in-out;
+}
+
+.main-logo {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    animation: fadeInOut 5s ease-in-out 5s;
+}
+
+.main-logo img {
+    width: 300px;
+    height: auto;
+}
+
+.crawl-content {
+    position: absolute;
+    top: 100%;
+    width: 80%;
+    max-width: 800px;
+    transform: rotateX(25deg);
+    font-size: 2em;
+    text-align: center;
+    line-height: 1.5;
+    animation: crawl 60s linear 10s;
+}
+
+.title-content {
+    margin-bottom: 50px;
+}
+
+.title-content h1 {
+    margin-top: 10px;
+    font-size: 2em;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes crawl {
+    0% { 
+        top: 100%; 
+        transform: rotateX(25deg) translateZ(0);
+    }
+    100% { 
+        top: -100%;
+        transform: rotateX(25deg) translateZ(-1500px);
+    }
+}
+
+.skip-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0,0,0,0.7);
+    color: #FFE81F;
+    border: 1px solid #FFE81F;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 101;
+    transition: all 0.3s ease;
+}
+
+.skip-button:hover {
+    background-color: #FFE81F;
+    color: #000;
+}
+
+/* Main Content */
+#main-content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+header {
+    text-align: center;
+    padding: 30px 0;
+}
+
+header h1 {
+    color: #FFE81F;
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 232, 31, 0.5);
+}
+
+.view-controls {
+    margin: 20px 0;
+}
+
+.view-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-button.active {
+    background-color: #FFE81F;
+    color: #000;
+}
+
+/* Films Container Layouts */
+#films-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;
+    transition: all 0.5s ease;
+}
+
+.grid-layout {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    width: 100%;
+}
+
+.scroll-layout {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    width: 100%;
+    padding: 20px 0;
+    scroll-snap-type: x mandatory;
+    gap: 30px;
+}
+
+.film-card {
+    background: rgba(25, 25, 25, 0.8);
+    border: 1px solid #FFE81F;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+}
+
+.film-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(255, 232, 31, 0.5);
+    cursor: pointer;
+}
+
+.film-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: #FFE81F;
+}
+
+.film-title {
+    color: #FFE81F;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.film-episode {
+    font-size: 0.9em;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.film-details {
+    margin-top: 15px;
+}
+
+.film-detail {
+    margin-bottom: 8px;
+}
+
+.film-detail span {
+    color: #FFE81F;
+}
+
+.film-crawl {
+    font-style: italic;
+    margin-top: 20px;
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #ddd;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+.view-details-btn {
+    background-color: #FFE81F;
+    color: #000;
+    border: none;
+    padding: 8px 15px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-end;
+}
+
+.view-details-btn:hover {
+    background-color: #fff;
+}
+
+/* Loading */
+.loading {
+    text-align: center;
+    color: #FFE81F;
+    font-size: 1.5em;
+    width: 100%;
+    padding: 50px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    overflow: auto;
+}
+
+.modal-content {
+    background: rgba(25, 25, 25, 0.95);
+    margin: 5% auto;
+    padding: 30px;
+    border: 1px solid #FFE81F;
+    width: 80%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 10px;
+    position: relative;
+}
+
+.close-button {
+    color: #FFE81F;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #fff;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+    color: #aaa;
+}
+
+.heart {
+    color: #ff0000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .film-card {
+        width: 100%;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .crawl-content {
+        font-size: 1.5em;
+    }
+}
