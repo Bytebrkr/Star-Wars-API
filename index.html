@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars Universe Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <!-- Loading Animation / Intro -->
+    <div id="intro-container">
+        <div class="star-wars-intro">
+            <p class="intro-text">A long time ago in a galaxy far, far away....</p>
+            <div class="main-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/694px-Star_Wars_Logo.svg.png" alt="Star Wars Logo">
+            </div>
+            <div class="crawl-content">
+                <div class="title-content">
+                    <p>EPISODE I</p>
+                    <h1>THE STAR WARS API</h1>
+                </div>
+                <p>Welcome to the Star Wars Universe Explorer! This webpage uses the Star Wars API to display information about your favorite films from the saga.</p>
+                <p>Browse through different films, discover characters, planets, and more from this iconic series.</p>
+                <p>May the Force be with you!</p>
+            </div>
+        </div>
+        <button id="skip-intro" class="skip-button">Skip Intro</button>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="hidden">
+        <header>
+            <h1>Star Wars Universe Explorer</h1>
+            <div class="view-controls">
+                <button id="grid-view" class="view-button active">Grid View</button>
+                <button id="scroll-view" class="view-button">Horizontal Scroll</button>
+            </div>
+        </header>
+        
+        <main>
+            <div id="films-container" class="grid-layout">
+                <!-- Films will be loaded here -->
+                <div class="loading">Loading films data...</div>
+            </div>
+        </main>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <div id="modal-content-container"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Created with <span class="heart">♥</span> and the Force | Data from SWAPI.tech</p>
+        </footer>
+    </div>
+
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
